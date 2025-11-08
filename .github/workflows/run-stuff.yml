@@ -46,5 +46,6 @@ jobs:
       run: |
         set -euxo pipefail
         for attempt in {1..15}; do
-          python -Werror stuff.py
+          python -Werror stuff.py |& tee -a out
+          ! grep 'unclosed event loop' out
         done
