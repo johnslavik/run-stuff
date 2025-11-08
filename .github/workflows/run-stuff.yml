@@ -45,4 +45,4 @@ jobs:
     - name: Run stuff
       run: |
         set -euxo pipefail
-        python stuff.py
+        python -Wall stuff.py
