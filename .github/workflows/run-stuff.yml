@@ -45,4 +45,4 @@ jobs:
     - name: Run stuff
       run: |
         set -euxo pipefail
-        uv run stuff.py
+        python stuff.py
