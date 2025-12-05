@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-strace realpath <(:) |& grep -E 'pipe'
+strace realpath -e <(:) |& grep -E 'pipe'
