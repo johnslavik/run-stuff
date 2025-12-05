@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 set -HCETeuxo pipefail
-strace realpath -e <(:) 2>&1 | grep -E 'pipe'
+echo $(realpath <(:) 2>&1)
