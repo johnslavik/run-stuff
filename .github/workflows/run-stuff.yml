@@ -1,7 +1,6 @@
 on: push
 name: Run stuff
 
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -12,7 +11,7 @@ defaults:
 
 jobs:
   run-stuff:
-    name: ${{ matrix.python }} ${{ matrix.os }}
+    name: ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -21,32 +20,10 @@ jobs:
         - windows-latest
         - ubuntu-latest
         - macos-latest
-        python:
-        - '3.9'
-        - '3.10'
-        - '3.11'
-        - '3.12'
-        - '3.13'
-        - '3.14'
-        - '3.15.0-alpha.1'
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python }}
-
-    - name: Set up uv
-      uses: astral-sh/setup-uv@v7
-
     - name: Run stuff
-      run: |
-        set -euxo pipefail
-        for attempt in {1..15}; do
-          python -Werror stuff.py 2>&1 | tee -a out
-          grep 'unclosed event loop' out && exit 1
-        done
-        exit 0
+      run: chmod +x ./stuff && ./stuff
