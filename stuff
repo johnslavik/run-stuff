@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -HCETeuxo pipefail
 # remap \x08
-echo '"\C-h": backward-kill-word' > ${TMP_INPUTRC:=$(mktemp)}
+echo '"\C-h": backward-kill-word' >| ${TMP_INPUTRC:=$(mktemp)}
 
 # run test
 INPUTRC=$TMP_INPUTRC ./python -m test test_pdb -m test_multiline_auto_indent
