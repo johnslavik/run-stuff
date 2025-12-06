@@ -3,8 +3,11 @@ set -HCETeuxo pipefail
 # remap \x08
 echo '"\C-h": backward-kill-word' >| ${TMP_INPUTRC:=$(mktemp)}
 
-# run test
+: test with override
 INPUTRC=$TMP_INPUTRC bind -p | grep -E $'\C-h'
+
+: test with devnull
+INPUTRC=/dev/null bind -p | grep -E $'\C-h'
 
 # cleanup
 rm -fv $TMP_INPUTRC
