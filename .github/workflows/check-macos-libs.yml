@@ -1,0 +1,13 @@
+on: push
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  what-the-fuck:
+    runs-on: macos-latest
+    name: what the fuck?
+    steps:
+    - uses: actions/checkout@v4
+    - run: ldconfig -p
