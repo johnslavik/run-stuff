@@ -4,7 +4,7 @@ set -HCETeuxo pipefail
 echo '"\C-h": backward-kill-word' >| ${TMP_INPUTRC:=$(mktemp)}
 
 # run test
-INPUTRC=$TMP_INPUTRC bind -q '"\C-h"'
+INPUTRC=$TMP_INPUTRC bind -p | grep -E $'\C-h'
 
 # cleanup
 rm -fv $TMP_INPUTRC
