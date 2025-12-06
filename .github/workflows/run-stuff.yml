@@ -25,5 +25,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
+    - name: Check bash version
+      run: bash --version
+
+    - name: Install newest Bash
+      run: brew install bash
+      if: ${{ matrix.os == 'macos-latest' }}
+
     - name: Run stuff
       run: chmod +x ./stuff && ./stuff
