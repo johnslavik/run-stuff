@@ -10,4 +10,4 @@ jobs:
     name: what the fuck?
     steps:
     - uses: actions/checkout@v4
-    - run: ldconfig -p
+    - run: sudo find /usr -type f -name "*.dylib"
