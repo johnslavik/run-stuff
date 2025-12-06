@@ -5,7 +5,7 @@ echo '"\C-h": backward-kill-word' >| ${TMP_INPUTRC:=$(mktemp)}
 :
 :
 : inspect initial
-INPUTRC=$TMP_INPUTRC bind -p | grep -E $'\C-h'
+bind -p | grep -E $'\C-h'
 :
 :
 : test with override
