@@ -1,6 +1,7 @@
 on: push
 name: Run stuff
 
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -11,7 +12,7 @@ defaults:
 
 jobs:
   run-stuff:
-    name: ${{ matrix.os }}
+    name: ${{ matrix.python }} ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -20,17 +21,28 @@ jobs:
         - windows-latest
         - ubuntu-latest
         - macos-latest
+        python:
+        - '3.9'
+        - '3.10'
+        - '3.11'
+        - '3.12'
+        - '3.13'
+        - '3.14'
+        - '3.15.0-alpha.1'
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Check bash version
-      run: bash --version
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python }}
 
-    - name: Install newest Bash
-      run: brew install bash
-      if: ${{ matrix.os == 'macos-latest' }}
+    - name: Set up uv
+      uses: astral-sh/setup-uv@v7
 
     - name: Run stuff
-      run: chmod +x ./stuff && ./stuff
+      run: |
+        set -euxo pipefail
+        python stuff.py
